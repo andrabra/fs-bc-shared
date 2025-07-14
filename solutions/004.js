@@ -51,4 +51,6 @@ async function placeOrder(items) {
   }
 }
 
-placeOrder(["item1", "item2", "item3"]);
+// placeOrder(["item1", "item2", "item3"]);
+// console.log([] + {});
+// console.log({} + [])
