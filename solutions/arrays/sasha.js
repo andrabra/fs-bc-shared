@@ -24,14 +24,26 @@ function example4(n) {
   return [2, 1][n - 1];
 }
 
-console.log(example1(1)); // 2
-console.log(example1(2)); // 1
+// console.log(example1(1)); // 2
+// console.log(example1(2)); // 1
 
-console.log(example2(1)); // 2
-console.log(example2(2)); // 1
+// console.log(example2(1)); // 2
+// console.log(example2(2)); // 1
 
-console.log(example3(1)); // 2
-console.log(example3(2)); // 1
+// console.log(example3(1)); // 2
+// console.log(example3(2)); // 1
 
-console.log(example4(1)); // 2
-console.log(example4(2)); // 1
+// console.log(example4(1)); // 2
+// console.log(example4(2)); // 1
+
+
+const team = ["Андрей", "Оля", "Кирилл", "Марина"];
+
+const getNextDuty = (member) => {
+  const index = team.indexOf(member)
+  return team[(index + 1) % team.length]
+}
+
+console.log(getNextDuty("Андрей")); // "Оля"
+console.log(getNextDuty("Кирилл")); // "Марина"
+console.log(getNextDuty("Марина")); // "Андрей"
