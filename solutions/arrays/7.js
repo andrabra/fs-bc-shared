@@ -17,24 +17,46 @@
 Array.range = function (start, count) {
   let res = [];
   for (let i = 0; i < count; i++) {
-		res.push(start);
-		start++;
-	}
-  return res;
-};
-
-
-Array.prototype.sum = function () {
-	let res = 0;
-  for (let i = 0; i < this.length; i++) {
-		res += this[i];
+    res.push(start);
+    start++;
   }
   return res;
 };
 
-console.log(Array.range(-1,1));
-console.log(Array.range(-3,5));
-console.log(Array.range(1,3));
+Array.prototype.sum = function () {
+  let res = 0;
+  for (let i = 0; i < this.length; i++) {
+    res += this[i];
+  }
+  return res;
+};
+
+// строковый массив
+let numbers = "[0, 1, 2, 3]";
+
+numbers = JSON.parse(numbers);
+
+var isEmpty = function (obj) {
+  if (Array.isArray(obj)) {
+    return !obj.length;
+  }
+  return JSON.parse(obj);
+};
+
+let user = {
+  name: "Василий Иванович",
+  age: 35
+};
+
+let res = JSON.stringify(JSON.parse(user));
+console.log('res: ', res);
+// res = JSON.parse(res);
+// console.log('res: ', typeof res);
+
+
+// console.log(Array.range(-1,1));
+// console.log(Array.range(-3,5));
+// console.log(Array.range(1,3));
 
 // console.log([1, 2, 3].sum());
 // console.log([-2, -1, -5].sum());
