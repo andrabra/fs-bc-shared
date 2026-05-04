@@ -48,6 +48,9 @@ let user = {
   age: 35
 };
 
+console.log('user: ', user);
+
+
 let res = JSON.stringify(JSON.parse(user));
 console.log('res: ', res);
 // res = JSON.parse(res);
