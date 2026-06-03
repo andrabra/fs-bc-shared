@@ -2,10 +2,47 @@
 // нет решения
 
 function deepClone(obj) {
-  // TODO: реализовать
   let res;
 
+  if (typeof obj !== 'object') {
+    res = obj;
+  } else if (obj === null) {
+    res = obj;
+  } else if (Array.isArray(obj)) {
+    res = obj.map((item) => deepClone(item));
+  } else if (obj instanceof Date) {
+    res = new Date(obj);
+  } else if (typeof obj === 'object') {
+    // Необязательная проверка, оставил для наглядности
+    res = {};
+    for (const [key, value] of Object.entries(obj)) {
+      res[key] = deepClone(value);
+    }
+  }
+
   return res;
+}
+
+function deepClone1(obj) {
+  if (typeof obj !== 'object') {
+    return obj;
+  } else if (obj === null) {
+    return obj;
+  } else if (Array.isArray(obj)) {
+    return obj.map((item) => deepClone1(item));
+  } else if (obj instanceof Date) {
+    return new Date(obj);
+  } else {
+    const res = {};
+    for (const [key, value] of Object.entries(obj)) {
+      res[key] = deepClone1(value);
+    }
+    return res;
+  }
+}
+
+function cheatDeepClone(obj) {
+  return structuredClone(obj);
 }
 
 const source = {
@@ -41,31 +78,3 @@ console.log(deepClone(null));
 
 console.log(deepClone([1, [2, 3], { value: 4 }]));
 // Ожидаемый результат: [1, [2, 3], { value: 4 }]
-
-// function deepClone(obj) {
-//   // TODO: реализовать
-//   if (obj === null) return null;
-//   if (!obj) return {};
-
-//   let res;
-
-//   if (typeof obj === 'object') {
-//     res = {};
-//   } else {
-//     res = [];
-//   }
-
-//   for (const [key, value] of Object.entries(obj)) {
-//     if (typeof value !== 'object') {
-//       res[key] = value;
-//     } else if (value instanceof Date) {
-//       res[key] = new Date(value);
-//     } else if (Array.isArray(value)) {
-//       res[key] = value.map((item) => deepClone(item));
-//     } else if (typeof value === 'object') {
-//       res[key] = deepClone(value);
-//     }
-//   }
-
-//   return res;
-// }
