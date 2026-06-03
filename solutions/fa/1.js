@@ -10,24 +10,24 @@
 // нет решения
 
 function normalizeUsers(users) {
-  if (!users.length) return [];
+  if (!Array.isArray(users) || !users.length) return [];
 
-  const usedEmails = new Set();
+  const seenEmails = new Set();
   const res = [];
 
   for (const user of users) {
-    const formattedEmail = user.email.trim().toLowerCase();
+    if (!user.email || typeof user.email !== 'string') continue; // убрать пользователей без валидного email;
 
-    usedEmails.add(formattedEmail);
-  }
+    const trimmedEmail = user.email.trim();
 
-  for (const user of users) {
-    if (!user.email) continue;
+    // здесь может остаться пустая строка '' если в user.email придет '  ' поэтому нужна проверка
+    if (trimmedEmail === '') continue;
 
-    const formattedEmail = user.email.trim().toLowerCase();
+    const normalizedEmail = trimmedEmail.toLowerCase();
 
-    if (usedEmails.has(formattedEmail)) {
-      res.push(user);
+    if (!seenEmails.has(normalizedEmail)) {
+      seenEmails.add(normalizedEmail);
+      res.push({ ...user, email: normalizedEmail });
     }
   }
 
@@ -40,6 +40,7 @@ const users = [
   { id: 3, name: 'Kate', email: 'KATE@mail.com', isActive: true },
   { id: 4, name: 'No Email', email: '', isActive: true },
   { id: 5, name: 'Null Email', email: null, isActive: false },
+  { id: 5, name: 'Null Email', email: '     ', isActive: false },
 ];
 
 console.log(normalizeUsers(users));
@@ -49,7 +50,7 @@ console.log(normalizeUsers(users));
 //   { id: 3, name: "Kate", email: "kate@mail.com", isActive: true }
 // ]
 
-// console.log(normalizeUsers([]));
+console.log(normalizeUsers([]));
 // Ожидаемый результат: []
 
 console.log(
