@@ -84,7 +84,50 @@ var removeElement = function (nums, val) {
   return [k, nums];
 };
 
-console.log(...removeElement([3, 2, 2, 3], 3));
+// console.log(...removeElement([3, 2, 2, 3], 3));
 // console.log(...removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)); // 5 [ 0, 1, 3, 0, 4, 0, 4, 2]
 // Input: nums = [0,1,2,2,3,0,4,2], val = 2
 // Output: 5, nums = [0,1,4,0,3,_,_,_]
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+// var removeDuplicates2 = function (nums) {
+//   if (nums.length === 0) return 0;
+
+//   let k = 1;
+
+//   for (let i = 1; i < nums.length; i++) {
+//     if (nums[i] !== nums[k - 1]) {
+//       nums[k] = nums[i];
+//       k++;
+//     } else if (nums[i] === nums[k - 1]) {
+//       if (nums[i] !== nums[k - 2]) {
+//         nums[k] = nums[i];
+//         k++;
+//       } else {
+//         continue;
+//       }
+//     }
+//   }
+//   return [k, nums.slice(0, k)];
+// };
+
+var removeDuplicates2 = function (nums) {
+  if (nums.length === 0) return 0;
+
+  let k = 1;
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[k - 1] || k < 2 || nums[i] !== nums[k - 2]) {
+      nums[k] = nums[i];
+      k++;
+    }
+  }
+  return [k, nums.slice(0, k)];
+};
+
+console.log(removeDuplicates2([1, 1, 1, 2, 2, 3])); // [1,1,2,2,3,_]
+console.log(removeDuplicates2([]));
+console.log(removeDuplicates2([0, 0, 1, 1, 1, 1, 2, 3, 3])); // [0,0,1,1,2,3,3,_,_]
