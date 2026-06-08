@@ -39,11 +39,11 @@ var cancellable = function (fn, args, t) {
     fn(...args);
   }, t);
   // TODO: вернуть функцию, которая отменяет этот план
-  const clearMyTimeOut = () => {
+  const cancelFn = () => {
     clearTimeout(timeoutId);
   };
 
-  return clearMyTimeOut;
+  return cancelFn;
 };
 
 // --- локальная проверка (упрощённо, без точных таймстампов LeetCode) ---
