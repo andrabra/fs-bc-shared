@@ -45,6 +45,14 @@ function cheatDeepClone(obj) {
   return structuredClone(obj);
 }
 
+function cheatDeepClone2(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function cheatDeepClone3(obj) {
+  return Object.assign({}, obj);
+}
+
 const source = {
   id: 1,
   name: 'Alex',
@@ -56,9 +64,9 @@ const source = {
   },
 };
 
-const cloned = deepClone(source);
+const cloned = cheatDeepClone2(source);
 
-console.log(cloned);
+console.log('here!', cloned);
 // Ожидаемый результат: объект с такими же данными
 
 console.log(cloned === source);
@@ -73,8 +81,8 @@ console.log(cloned.tags === source.tags);
 console.log(cloned.createdAt === source.createdAt);
 // Ожидаемый результат: false
 
-console.log(deepClone(null));
+console.log(cheatDeepClone2(null));
 // Ожидаемый результат: null
 
-console.log(deepClone([1, [2, 3], { value: 4 }]));
+console.log(cheatDeepClone2([1, [2, 3], { value: 4 }]));
 // Ожидаемый результат: [1, [2, 3], { value: 4 }]
