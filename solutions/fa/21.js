@@ -1,9 +1,15 @@
 // Поменять местами ключи и значения объекта.
 
 function invert(obj) {
-  const keys = Object.keys(obj);
-  const values = Object.values(obj);
-  let object = {};
+  const resObject = {};
+
+  const entries = Object.entries(obj);
+
+  for (let entry of entries) {
+    resObject[entry[1]] = entry[0];
+  }
+
+  return resObject;
 }
 
 console.log('basic:', invert({ a: 1, b: 2 }));
