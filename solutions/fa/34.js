@@ -94,4 +94,22 @@ function calculateAge(bornYear, targetYear) {
   return `You are ${diffYears} year${diffYears !== 1 ? 's' : ''} old.`;
 }
 
-console.log(calculateAge(2012, 2016));
+// console.log(calculateAge(2012, 2016));
+
+// https://www.codewars.com/kata/5aee86c5783bb432cd000018
+function hydrate(s) {
+  const regex = new RegExp(/\d+/g);
+
+  let counter = 0;
+
+  counter = s
+    .split(' ')
+    .filter((strItem) => strItem.match(regex))
+    .reduce((acc, item) => {
+      return (acc += Number(item));
+    }, 0);
+
+  return `${counter} glass${counter !== 1 ? 'es' : ''} of water`;
+}
+
+console.log(hydrate('1 shot, 5 beers, 2 shots, 1 glass of wine, 1 beer'));
