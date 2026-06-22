@@ -100,9 +100,7 @@ function calculateAge(bornYear, targetYear) {
 function hydrate(s) {
   const regex = new RegExp(/\d+/g);
 
-  let counter = 0;
-
-  counter = s
+  const counter = s
     .split(' ')
     .filter((strItem) => strItem.match(regex))
     .reduce((acc, item) => {
