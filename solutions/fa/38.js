@@ -30,7 +30,14 @@
  * @return {boolean}
  */
 var isPalindrome = function (s) {
-  // ваш код
+  const regex = new RegExp(/[^a-zA-Z0-9]/g);
+
+  const cleaned = s.replace(regex, '').toLowerCase();
+  const reverseCleaned = cleaned.split('').reverse().join('').toLowerCase();
+
+  if (cleaned !== reverseCleaned) return false;
+
+  return true;
 };
 
 // --- локальные тесты ---
@@ -45,11 +52,7 @@ function assertEqual(label, got, expected) {
 }
 
 function runTests() {
-  assertEqual(
-    'ex1',
-    isPalindrome('A man, a plan, a canal: Panama'),
-    true,
-  );
+  assertEqual('ex1', isPalindrome('A man, a plan, a canal: Panama'), true);
 
   assertEqual('ex2', isPalindrome('race a car'), false);
   assertEqual('ex3', isPalindrome(' '), true);
@@ -62,4 +65,4 @@ function runTests() {
 }
 
 // Раскомментируйте после реализации:
-// runTests();
+runTests();
