@@ -43,6 +43,13 @@
 function palindrome(num) {
   if (!Number.isInteger(num) || num < 0) return 'Not valid';
 
+  function isValidNumericalPalindrome(str) {
+    if (str.length < 2) return false;
+    if (str[0] === '0' || str[str.length - 1] === '0') return false;
+    if (str !== str.split('').reverse().join('')) return false;
+    return true;
+  }
+
   const str = String(num).split('');
   const palSet = new Set();
 
@@ -53,8 +60,10 @@ function palindrome(num) {
     for (let j = str.length - 1; j > i; j--) {
       if (str[i] === str[j]) {
         const sub = str.slice(i, j + 1);
-        if (palindrome(sub)) {
-          palSet.add(Number(sub.join('')));
+        const subStr = sub.join('');
+
+        if (isValidNumericalPalindrome(subStr)) {
+          palSet.add(Number(subStr));
         }
       }
     }
