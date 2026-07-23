@@ -4,12 +4,12 @@
 // По сути, нужно переставить цифры так, чтобы получилось максимально возможное число.
 
 function descendingOrder(n) {
-  return Number(
+  return (
     n
       .toString()
       .split('')
       .sort((a, b) => b - a)
-      .join(''),
+      .join('') * 1
   );
 }
 
