@@ -26,42 +26,43 @@
 
 //
 
-// class HttpError extends Error {
-//   constructor(response) {
-//     super(`${response.status} for ${response.url}`);
-//     this.name = 'HttpError';
-//     this.response = response;
-//   }
-// }
+class HttpError extends Error {
+  constructor(response) {
+    super(`${response.status} for ${response.url}`);
+    this.name = 'HttpError';
+    this.response = response;
+  }
+}
 
-// async function loadJson(url) {
-//   const response = await fetch(url);
+async function loadJson(url) {
+  const response = await fetch(url);
 
-//   if (response.status === 200) {
-//     return response.json();
-//   }
+  if (response.status === 200) {
+    return response.json();
+  }
 
-//   throw new HttpError(response);
-// }
+  throw new HttpError(response);
+}
 
-// // Запрашивать логин, пока github не вернёт существующего пользователя.
-// async function demoGithubUser() {
-//   let name = prompt('Введите логин?', 'iliakan');
+// Запрашивать логин, пока github не вернёт существующего пользователя.
+async function demoGithubUser() {
+  while (true) {
+    let name = prompt('Введите логин?', 'iliakan');
 
-//   try {
-//     const user = await loadJson(`https://api.github.com/users/${name}`);
-//     return user;
-//   } catch (err) {
-//     if (err instanceof HttpError && err.response.status == 404) {
-//       alert('Такого пользователя не существует, пожалуйста, повторите ввод.');
-//       return demoGithubUser();
-//     } else {
-//       throw err;
-//     }
-//   }
-// }
+    try {
+      const user = await loadJson(`https://api.github.com/users/${name}`);
+      return user;
+    } catch (err) {
+      if (err instanceof HttpError && err.response.status == 404) {
+        alert('Такого пользователя не существует, пожалуйста, повторите ввод.');
+      } else {
+        throw err;
+      }
+    }
+  }
+}
 
-// demoGithubUser();
+demoGithubUser();
 
 function groupByKey(items, key) {
   if (!items.length) return {};
@@ -126,5 +127,3 @@ const people = [
 
 // const groupedByAddress = groupByPath(people, 'address.city');
 // console.log(groupedByAddress);
-
-
